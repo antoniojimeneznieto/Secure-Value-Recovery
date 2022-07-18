@@ -1,13 +1,3 @@
-+++
-title = "CryptKVS : description générale"
-template = "project/page.html"
-weight = 3
-
-[extra]
-week = 1
-revision = "2022.02.09 / 1"
-+++
-
 
 ## Plan de ce document
 
