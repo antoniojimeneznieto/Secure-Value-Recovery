@@ -7,13 +7,13 @@
 
 ## Context
 
-The first goal of this project is to make you develop a large program in C on a "system" theme.  
+The first goal of this project is to develop a large program in C on a "system" theme.  
 
-The management of confidential data in the cloud is one of the major issues of our time.  You only have to read the newspapers to understand the issues related to massive data loss when managed centrally, whether in local servers or in the cloud.
+The management of confidential data in the cloud is one of the major issues of our time. We only have to read the newspapers to understand the issues related to massive data loss when managed centrally, whether in local servers or in the cloud.
 
 Password management is a good example.  The site [haveibeenpwned](https://haveibeenpwned.com/) aggregates a collection of data stolen from over 500 websites, totaling 11 billion accounts.  Your email may be one of them, by the way.
 
-Ideally, confidential data is never available in a centralized site.  Communication systems with end-to-end encryption ensure that relay servers cannot decrypt the content of messages. The mobile applications [SIGNAL](https://en.wikipedia.org/wiki/Signal_(software)) and WhatsApp are two well-known examples; both use variants of the same cryptographic protocol.
+Ideally, confidential data is never available in a centralized site. Communication systems with end-to-end encryption ensure that relay servers cannot decrypt the content of messages. The mobile applications [SIGNAL](https://en.wikipedia.org/wiki/Signal_(software)) and WhatsApp are two well-known examples; both use variants of the same cryptographic protocol.
 
 SIGNAL is particularly well known for its maximum privacy.  The goal of the foundation that operates it is to offer a global deployment service (over 40 million active users) while minimizing the information collected by their servers (see [Wikipedia](https://en.wikipedia.org/wiki/Signal_(software))).
 
@@ -24,11 +24,11 @@ The underlying technology is called "_secure value recovery_" and is described h
 
 ## Goals
 
-During this project, you will build a simplified version of "secure value recovery" that encrypts data in a shared database: a "_(en)crypted key-value store" (hence the project name: "CryptKVS").
+During this project, we will build a simplified version of "secure value recovery" that encrypts data in a shared database: a "_(en)crypted key-value store" (hence the project name: "CryptKVS").
 
-**IMPORTANT SECURITY NOTE:** for simplicity, the solution you will implement is not resistant to brute force attacks, as explained below.  In security, any simplification or change has side effects that must be analyzed in detail. This is not the objective of this course.
+**IMPORTANT SECURITY NOTE:** for simplicity, the solution we will implement is not resistant to brute force attacks, as explained below.  In security, any simplification or change has side effects that must be analyzed in detail. This is not the objective of this course.
 
-The main educational objective is to give you an overview of the tools and techniques for building system-oriented programming, including basic cryptographic libraries, but this is not a computer security course. **end of note]**
+The main educational objective is to give an overview of the tools and techniques for building system-oriented programming, including basic cryptographic libraries, but this is not a computer security course. **end of note]**
 
 
 During the first few weeks, the focus will be on implementing the basic system functions, namely:
@@ -37,10 +37,10 @@ During the first few weeks, the focus will be on implementing the basic system f
 * decrypt a value when the key and the password are known;
 * create a key and associate a corresponding value.
 
-In this first phase, the functions will be exposed via a command line utility. During the last weeks of the semester, you will build a real web server that will expose the same functionality by separating the client and server functions.
+In this first phase, the functions will be exposed via a command line utility. During the last weeks of the semester, we will build a real web server that will expose the same functionality by separating the client and server functions.
 
 
-During this project, you will be able to practice and discover:
+During this project, we will be able to practice and discover:
 
 * C programming in a medium-sized project;
 * debugging tools presented during the first 3 weeks (`gdb`, `asan`, etc.); the emphasis will be on correct memory management (allocation, deallocation, bounds checking);
@@ -50,9 +50,9 @@ During this project, you will be able to practice and discover:
 * the `https` protocol and the management of SSL certificates.
 
 
-During the 10 weeks of this project, you will have to implement, gradually piece by piece, the key components mentioned above and described below, then detailed in the weekly topics.
+During the 10 weeks of this project, we will have to implement, gradually piece by piece, the key components mentioned above and described below, then detailed in the weekly topics.
 
-You will also have to develop additional tests that are useful for observing and analyzing the operation of the system. These tests will be developed as executables independent of the main core.
+We will also have to develop additional tests that are useful for observing and analyzing the operation of the system. These tests will be developed as executables independent of the main core.
 
 In order to facilitate the organization of your work (in the group and in time), we advise you to consult [the course schedule page](/project/bareme.html) (and read it in its entirety!!).
 
@@ -116,18 +116,12 @@ This protocol has a number of interesting properties, available in the SIGNAL so
 
 * Week 6 : command " set " : requires fseek, fwrite, to append the new value and update an existing entry.
 
-* Week 7: "new" command: requires fseek, fwrite, to append the new value and update an existing entry;
+* Week 7: command " new " : create a new key.  This is where we introduce open hashing instead of linear scan. Move away from fixed-sized tables to a dynamic approach where the table size is set in the header.
 
-* Week 7: command " new " : create a new key.  This is where we introduce open hashing instead of linear scan.  Move away from fixed-sized tables to a dynamic approach where the table size is set in the header.
+* Week 9: refactoring the CLI to be table-driven; also preparation for client-server programming; (students will probably not be asked to implement "create-kvs" to create a table).
 
-* Semaine 9 : refactoring du CLI pour qu'il soit piloté par des tables ; également préparation à la programmation client-serveur ; (il ne sera probablement pas demandé aux étudiants d'implémenter "create-kvs" pour créer une table).
+* Week 10: "stat"/network and "get"/network commands: instructors provide the running server (shared by all).   Programming HTTP clients.  Requires mongoose.
 
-* **Second rendu :** correspond au travail des semaines 4 à 9 ; à rendre en fin de semaine 10 ;
+* Week 11: "httpd" command: students connect to their own web server.   Students implement "stat"/network "get"/network.
 
-* Semaine 10 : commande "stat"/network et "get"/network : les formateurs fournissent le serveur en fonctionnement (partagé par tous).   Programmation de clients HTTP.  Nécessite mongoose.
-
-* Semaine 11 : commande "httpd" : les étudiants se connectent à leur propre serveur web.   Les étudiants implémentent "stat"/réseau "get"/réseau.
-
-* Semaine 12 : commande "set"/network et "new"/network. (côté client et côté serveur).  Pour des raisons de simplicité, "set" est implémenté en utilisant "GET" plutôt que "POST" (petits secrets seulement) ; les étudiants plus avancés peuvent par contre bien sûr implémenter un " POST ".
-
-* **Rendu final :** correspond au travail des semaines 4 à 14 ; à rendre en fin de semestre.
+* Week 12: "set"/network and "new"/network commands (client and server side).  For simplicity, "set" is implemented using "GET" rather than "POST" (little secrets only); more advanced students can of course implement a "POST".
